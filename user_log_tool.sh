@@ -240,9 +240,5 @@ if [ $# -gt 0 ]; then
     exit 0
 fi
 
-# 환영 메시지
-echo -e "${BLUE}사용자 로그 기록 및 요약 시스템을 시작합니다...${NC}"
-sleep 1
-
 # 메인 함수 실행
 main
