@@ -135,27 +135,22 @@ handle_command_line_args() {
         "-c"|"--commands"|"commands")
             clear
             save_user_commands
-            show_generated_files
             ;;
         "-p"|"--popular"|"popular")
             clear
             extract_popular_commands
-            show_generated_files
             ;;
         "-u"|"--users"|"users")
             clear
             show_logged_users
-            show_generated_files
             ;;
         "-s"|"--status"|"status")
             clear
             check_system_status
-            show_generated_files
             ;;
         "-t"|"--top"|"processes")
             clear
             show_top_processes
-            show_generated_files
             ;;
         "-h"|"--help"|"help")
             show_help
@@ -179,7 +174,6 @@ main() {
             1)
                 clear
                 save_user_commands
-                show_generated_files
                 echo ""
                 echo -n "계속하려면 Enter를 누르세요..."
                 read
@@ -187,7 +181,6 @@ main() {
             2)
                 clear
                 extract_popular_commands
-                show_generated_files
                 echo ""
                 echo -n "계속하려면 Enter를 누르세요..."
                 read
@@ -195,7 +188,6 @@ main() {
             3)
                 clear
                 show_logged_users
-                show_generated_files
                 echo ""
                 echo -n "계속하려면 Enter를 누르세요..."
                 read
@@ -203,7 +195,6 @@ main() {
             4)
                 clear
                 check_system_status
-                show_generated_files
                 echo ""
                 echo -n "계속하려면 Enter를 누르세요..."
                 read
@@ -211,7 +202,6 @@ main() {
             5)
                 clear
                 show_top_processes
-                show_generated_files
                 echo ""
                 echo -n "계속하려면 Enter를 누르세요..."
                 read
