@@ -76,17 +76,9 @@ check_system_status() {
     
     # 시스템 상태 정보 수집
     {
-        echo "=== 시스템 상태 보고서 ==="
-        echo "생성 시간: $(date)"
-        echo ""
-        echo "=== 시스템 부하 (Load Average) ==="
+        echo "=== 시스템 부하 평균(Load Average) ==="
         uptime
         echo ""
-        echo "=== 메모리 사용률 ==="
-        free -h 2>/dev/null || vm_stat
-        echo ""
-        echo "=== 디스크 사용률 ==="
-        df -h
     } > system_status.txt
     
     echo -e "${GREEN}시스템 상태가 system_status.txt에 저장되었습니다.${NC}"
@@ -212,7 +204,6 @@ main() {
                 ;;
             *)
                 echo -e "${RED}잘못된 선택입니다. 1-6 사이의 숫자를 입력해주세요.${NC}"
-                sleep 2
                 ;;
         esac
     done
