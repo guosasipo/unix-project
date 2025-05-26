@@ -43,11 +43,6 @@ save_user_commands() {
     tail -20 "$HISTORY_FILE" > user_commands.txt
     
     echo -e "${GREEN}최근 20개 명령어가 user_commands.txt에 저장되었습니다.${NC}"
-    echo ""
-    echo "저장된 명령어 미리보기:"
-    echo "------------------------"
-    head -5 user_commands.txt
-    echo "..."
 }
 
 # 2. 인기 명령어 추출 함수
@@ -63,10 +58,6 @@ extract_popular_commands() {
     awk '{print $1}' user_commands.txt | sort | uniq -c | sort -nr | head -5 > popular_commands.txt
     
     echo -e "${GREEN}상위 5개 인기 명령어가 popular_commands.txt에 저장되었습니다.${NC}"
-    echo ""
-    echo "인기 명령어 순위:"
-    echo "----------------"
-    cat popular_commands.txt | awk '{printf "%d. %s (사용횟수: %d)\n", NR, $2, $1}'
 }
 
 # 3. 현재 로그인한 사용자 정보 출력 함수
@@ -77,14 +68,6 @@ show_logged_users() {
     who > logged_users.txt
     
     echo -e "${GREEN}로그인 사용자 정보가 logged_users.txt에 저장되었습니다.${NC}"
-    echo ""
-    echo "현재 로그인한 사용자:"
-    echo "-------------------"
-    cat logged_users.txt
-    
-    # 추가 정보
-    echo ""
-    echo "총 로그인 사용자 수: $(who | wc -l)"
 }
 
 # 4. 시스템 부하 요약 함수
@@ -107,10 +90,6 @@ check_system_status() {
     } > system_status.txt
     
     echo -e "${GREEN}시스템 상태가 system_status.txt에 저장되었습니다.${NC}"
-    echo ""
-    echo "시스템 부하 정보:"
-    echo "---------------"
-    uptime
 }
 
 # 5. 보너스: 상위 5개 프로세스 보기 함수
@@ -127,35 +106,6 @@ show_top_processes() {
     } > top_processes.txt
     
     echo -e "${GREEN}상위 5개 프로세스 정보가 top_processes.txt에 저장되었습니다.${NC}"
-    echo ""
-    echo "현재 상위 5개 프로세스:"
-    echo "--------------------"
-    ps aux | head -1
-    ps aux | tail -n +2 | sort -k3 -nr | head -5
-}
-
-# 모든 파일 생성 함수
-generate_all_files() {
-    echo -e "${YELLOW}모든 파일을 생성하는 중...${NC}"
-    save_user_commands
-    echo ""
-    extract_popular_commands
-    echo ""
-    show_logged_users
-    echo ""
-    check_system_status
-    echo ""
-    show_top_processes
-    echo ""
-    echo -e "${GREEN}모든 파일이 성공적으로 생성되었습니다!${NC}"
-}
-
-# 파일 목록 표시 함수
-show_generated_files() {
-    echo ""
-    echo -e "${BLUE}생성된 파일 목록:${NC}"
-    echo "=================="
-    ls -la *.txt 2>/dev/null | awk '{print $9 " (" $5 " bytes)"}' | grep -v "^("
 }
 
 # 도움말 표시 함수
@@ -174,7 +124,6 @@ show_help() {
     echo "  -u, --users           - 현재 로그인 사용자 보기"
     echo "  -s, --status          - 시스템 상태 확인"
     echo "  -t, --top             - 상위 5개 프로세스 보기"
-    echo "  -a, --all             - 모든 기능 한 번에 실행"
     echo "  -h, --help            - 이 도움말 표시"
     echo ""
 }
@@ -206,11 +155,6 @@ handle_command_line_args() {
         "-t"|"--top"|"processes")
             clear
             show_top_processes
-            show_generated_files
-            ;;
-        "-a"|"--all"|"all")
-            clear
-            generate_all_files
             show_generated_files
             ;;
         "-h"|"--help"|"help")
@@ -274,16 +218,6 @@ main() {
                 ;;
             6)
                 clear
-                echo -e "${BLUE}모든 기능을 한 번에 실행하시겠습니까? (y/n): ${NC}"
-                read -n 1 confirm
-                echo ""
-                if [[ $confirm == "y" || $confirm == "Y" ]]; then
-                    clear
-                    generate_all_files
-                    show_generated_files
-                    echo ""
-                fi
-                echo -e "${GREEN}프로그램을 종료합니다. 감사합니다!${NC}"
                 exit 0
                 ;;
             *)
