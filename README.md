@@ -15,11 +15,11 @@ chmod +x user_log_tool.sh
 ## 기능
 
 ### [1] 사용자 명령어 기록 저장
-- `history`, `tail` 명령어를 통해 사용자가 최근에 사용했던 명령어 20개를 추출
+- `cat`, `tail` 명령어를 통해 최근 사용한 20개의 명령어를 `~/.bash_history` 에서 추출
 - `user_commands.txt` 파일에 저장
 
 ### [2] 인기 명령어 추출
-- `sort`, `uniq`, `head` 명령어를 통해 `user_commands.txt` 파일에서 가장 많이 사용한 상위 5개 명령어 분석
+- `sed`, `nawk`, `sort`, `uniq`, `head` 명령어를 통해 `user_commands.txt` 파일에서 가장 많이 사용한 상위 5개 명령어 분석
 - `popular_commands.txt` 파일에 저장
 
 ### [3] 현재 로그인 사용자 보기
