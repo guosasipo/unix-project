@@ -37,7 +37,7 @@ user_commands() {
     {
         echo "*** 최근 20개 사용자 명령어 기록 ***"
         echo ""
-        cat ~/.*_history | tail -20
+        fc -ln -20
     } > user_commands.txt
     echo -e "${GREEN_BG}${BOLD} 최근 20개 명령어가 user_commands.txt에 저장되었습니다. ${NC}"
 }
