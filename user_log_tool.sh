@@ -36,6 +36,7 @@ show_menu() {
 user_commands() {
     {
         echo "*** 최근 20개 사용자 명령어 기록 ***"
+        echo ""
         cat ~/.*_history | tail -20
     } > user_commands.txt
     echo -e "${GREEN_BG}${BOLD} 최근 20개 명령어가 user_commands.txt에 저장되었습니다. ${NC}"
@@ -48,7 +49,8 @@ popular_commands() {
     fi
     {
         echo "*** 가장 많이 사용한 상위 5개 명령어 ***"
-        sed '1d' user_commands.txt | awk '{print $1}' | sort | uniq -c | sort -nr | head -5
+        echo ""
+        sed '1d' user_commands.txt | awk 'NF {print $1}' | sort | uniq -c | sort -nr | head -5
     } > popular_commands.txt
 
     echo -e "${GREEN_BG}${BOLD} 상위 5개 인기 명령어가 popular_commands.txt에 저장되었습니다. ${NC}"
@@ -57,6 +59,7 @@ popular_commands() {
 logged_users() {
     {
         echo "*** 현재 로그인 사용자 정보 ***"
+        echo ""
         who
     } > logged_users.txt
 
@@ -66,6 +69,7 @@ logged_users() {
 system_status() {
     {
         echo "*** 시스템 부하 평균 ***"
+        echo ""
         uptime
     } > system_status.txt
     
@@ -75,6 +79,7 @@ system_status() {
 top_processes() {
     {
         echo "*** 상위 5개 프로세스 (CPU 사용률 기준) ***"
+        echo ""
         prstat -s cpu -n 5 1 1
     } > top_processes.txt
     
