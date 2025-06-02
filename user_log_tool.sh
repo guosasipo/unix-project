@@ -48,7 +48,7 @@ popular_commands() {
     fi
     {
         echo "*** 가장 많이 사용한 상위 5개 명령어 ***"
-        awk '{print $1}' user_commands.txt | sort | uniq -c | sort -nr | head -5 
+        sed '1d' user_commands.txt | awk '{print $1}' | sort | uniq -c | sort -nr | head -5
     } > popular_commands.txt
 
     echo -e "${GREEN_BG}${BOLD} 상위 5개 인기 명령어가 popular_commands.txt에 저장되었습니다. ${NC}"
