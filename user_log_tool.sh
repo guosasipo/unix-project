@@ -37,8 +37,7 @@ user_commands() {
     {
         echo "*** 최근 20개 사용자 명령어 기록 ***"
         echo ""
-        HIST=$(history)
-        echo "$HIST" | tail -n 20 | sed 's/^[ ]*[0-9]*[ ]*//'
+        history | tail -20 | sed 's/^[ ]*[0-9]*[ ]*//'
     } > user_commands.txt
     echo -e "${GREEN_BG}${BOLD} 최근 20개 명령어가 user_commands.txt에 저장되었습니다. ${NC}"
 }
