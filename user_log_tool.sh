@@ -37,7 +37,7 @@ user_commands() {
     {
         echo "*** 최근 20개 사용자 명령어 기록 ***"
         echo ""
-        history | tail -20 | nawk '{$1=""; sub(/^ /, ""); print}'
+        bash -i -c 'fc -ln -20'
     } > user_commands.txt
     echo -e "${GREEN_BG}${BOLD} 최근 20개 명령어가 user_commands.txt에 저장되었습니다. ${NC}"
 }
@@ -50,7 +50,7 @@ popular_commands() {
     {
         echo "*** 가장 많이 사용한 상위 5개 명령어 ***"
         echo ""
-        bash -i -c 'fc -ln -20'
+        sed '1d' user_commands.txt | nawk 'NF {print $1}' | sort | uniq -c | sort -nr | head -5
     } > popular_commands.txt
 
     echo -e "${GREEN_BG}${BOLD} 상위 5개 인기 명령어가 popular_commands.txt에 저장되었습니다. ${NC}"
