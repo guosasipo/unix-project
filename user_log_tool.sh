@@ -34,7 +34,10 @@ show_menu() {
 }
 
 user_commands() {
-    cat ~/.*_history | tail -20 > user_commands.txt
+    {
+        echo "*** 최근 20개 사용자 명령어 기록 ***"
+        cat ~/.*_history | tail -20
+    } > user_commands.txt
     echo -e "${GREEN_BG}${BOLD} 최근 20개 명령어가 user_commands.txt에 저장되었습니다. ${NC}"
 }
 
@@ -43,22 +46,27 @@ popular_commands() {
         echo -e "${RED_BG}${BOLD}user_commands.txt 파일이 없습니다. 먼저 명령어 기록을 저장해주세요.${NC}"
         return
     fi
-    awk '{print $1}' user_commands.txt | sort | uniq -c | sort -nr | head -5 > popular_commands.txt
-    
+    {
+        echo "*** 가장 많이 사용한 상위 5개 명령어 ***"
+        awk '{print $1}' user_commands.txt | sort | uniq -c | sort -nr | head -5 
+    } > popular_commands.txt
+
     echo -e "${GREEN_BG}${BOLD} 상위 5개 인기 명령어가 popular_commands.txt에 저장되었습니다. ${NC}"
 }
 
 logged_users() {
-    who > logged_users.txt
-    
+    {
+        echo "*** 현재 로그인 사용자 정보 ***"
+        who
+    } > logged_users.txt
+
     echo -e "${GREEN_BG}${BOLD} 로그인 사용자 정보가 logged_users.txt에 저장되었습니다. ${NC}"
 }
 
 system_status() {
     {
-        echo "*** 시스템 부하 평균(Load Average) ***"
+        echo "*** 시스템 부하 평균 ***"
         uptime
-        echo ""
     } > system_status.txt
     
     echo -e "${GREEN_BG}${BOLD} 시스템 상태가 system_status.txt에 저장되었습니다. ${NC}"
@@ -67,8 +75,6 @@ system_status() {
 top_processes() {
     {
         echo "*** 상위 5개 프로세스 (CPU 사용률 기준) ***"
-        echo "생성 시간: $(date)"
-        echo ""
         prstat -s cpu -n 5 1 1
     } > top_processes.txt
     
